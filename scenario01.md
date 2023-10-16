@@ -1,6 +1,6 @@
 # Protein quantification (scenario01)
 
-In this markdown file we are quantifying protein from unknown samples using the METHOD NAME. We already know that the calibration curve ($y=mx+b$) has the parameters:
+In this markdown file we are quantifying protein from unknown samples from the EXPERIMENT_LABEL using the METHOD_NAME. We already know that the calibration curve ($y=mx+b$) has the parameters:
 
 ```r
 #calibration curve slope
@@ -22,7 +22,7 @@ We want to prepare samples for Western Blot, thus we can quantify the protein in
 prot_quantification <- function(m,b,my_csv)
 ```
 
-These are the results:
+These are the results of the quantification and the volumes needed to load the samples into the gel:
 
 ```r
 print(output_table)

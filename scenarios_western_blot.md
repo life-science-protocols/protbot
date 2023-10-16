@@ -4,8 +4,8 @@ The goal of this package is to streamline the quantificaiton of protein quantifi
 The main variables that we need to know are number of samples (e.g. control and treated) and the number of biological and technical replicates. 
 
 `biological_group`: `control` `treated` `...`
-`biological_replicate`: `1` `2` `...`
-`technical_replicate`: `1` `2` `...`
+`biological_replicate`: `1` `2` `3` `...`
+`technical_replicate`: `1` `2` `3` `...`
 
 This is important to determinine the number of wells or cuvettes required, and naturally the volume of reagents needed.
 
@@ -27,18 +27,22 @@ Although each method has different approaches (chemically speaking) the calibrat
 
 The inputs are:
 - the parameters of the equation y=mx+b (`m` is slope and `b` the intercept)
-- the absorvance values for the samples with unknown protein concentration
-- the amount of protein to load into the gel
-- the max volume allowed to pipette
+- `input_table` contains:
+  - the absorvance values for the samples with unknown protein concentration
+  - the amount of protein to load into the gel
+  - the max volume allowed to pipette
+- `experiment_label` to create a folder with organized data and plots
+- `send_results_to_here` path to where the files should be export (optional argument)
 
 The output are:
-- the calibration curve
-- the correspondent volume for the desired protein amount and buffer to make the max volume
+- a calibration curve (forced)
+- a bar plot with protein concentration (y) and samples (x)
+- the output_table with correspondent volume for the desired protein amount and buffer to make the max volume
 
 The function would look something like this:
 
 ```r
-function(m,b,input_table,max_volume)
+function_scenario01(experiment_label,m,b,r2,input_table, send_results_to_here)
 ```
 
 And the of input table (fake values):
@@ -57,4 +61,30 @@ Example of output table (fake values):
 | :----: | :---------: | :-----------: | :-----------: | :--------: | :----------------: |
 |   1    |     50      |      10       |      10       |     20     |        0.5         |
 |   2    |     50      |      18       |       2       |     20     |        0.1         |
-|   2    |     50      |       1       |      19       |     20     |        0.9         |
+|   3    |     50      |       1       |      19       |     20     |        0.9         |
+
+This function will (option?) also create a directory (name as in `experiment_label`) with:
+- 00_R_objects
+  - save R objects for (possible) future use
+- 01_input_data 
+  - a copy of `input_table.csv`
+- 02_data_analysis
+  - copy `rmd` of `scenario01` from package and runs it
+- 03_output_data
+  - the `output_table.csv`
+- 04_output_plots
+  - calibration curve
+  - bar plot with quantification
+- 05_output_pdf
+  - export rmd as pdf/html
+
+Stepwise the function would do this:
+1. create the new directory in specified destination (or not)
+2. copy the `input_table.csv`
+3. copy `rmd` of `scenario01` from package and run it 
+   1. this runs another function that reads the absorvance values `df$abs` and performs the protein quantification and appends it to the `input_table` to create the `output_table`
+   2. then this is used to calculte the `sample_volume` and `buffer_volume` wich will be appended to the table from the previous step
+      1. this could be a function, because it is a transversal step for many methods
+4. make the plots
+5. export rmd to pdf/or html
+6. export R objects

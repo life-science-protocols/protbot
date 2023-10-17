@@ -23,7 +23,7 @@ Different experimental assays to perform calibration curves:
 
 Although each method has different approaches (chemically speaking) the calibration curve should be performed the same way for all of them using a linear regression.Then, from this curve the unknown samples can be quatified and the output table will give different volumes from different amounts (µg) of protein. 
 
-# Simplest scenario possible
+# Scenario-01 : simplest scenario possible
 
 The inputs are:
 - the parameters of the equation y=mx+b (`m` is slope and `b` the intercept)
@@ -42,7 +42,7 @@ The output are:
 The function would look something like this:
 
 ```r
-function_scenario01(experiment_label,m,b,r2,input_table, send_results_to_here)
+function_scenario01(experiment_label,m,b,r2,input_sample_table, send_results_to_here)
 ```
 
 And the of input table (fake values):
@@ -67,14 +67,14 @@ This function will (option?) also create a directory (name as in `experiment_lab
 - 00_R_objects
   - save R objects for (possible) future use
 - 01_input_data 
-  - a copy of `input_table.csv`
+  - a copy of `input_sample_table.csv`
 - 02_data_analysis
   - copy `rmd` of `scenario01` from package and runs it
 - 03_output_data
   - the `output_table.csv`
 - 04_output_plots
   - calibration curve
-  - bar plot with quantification
+  - bar plot with quantified protein
 - 05_output_pdf
   - export rmd as pdf/html
 
@@ -86,5 +86,52 @@ Stepwise the function would do this:
    2. then this is used to calculte the `sample_volume` and `buffer_volume` wich will be appended to the table from the previous step
       1. this could be a function, because it is a transversal step for many methods
 4. make the plots
+   1. calibration curve
+   2. bar plot
 5. export rmd to pdf/or html
 6. export R objects
+
+# Scenario-02 : common scenario 
+
+The inputs are:
+- `input_table1` or `input_calibration_table` contains:
+  - the standard concentration 
+  - the absorvance values for the standard concentration 
+- `input_table2` or `input_sample_table` contains:
+  - the absorvance values for the samples with unknown protein concentration
+  - the amount of protein to load into the gel
+  - the max volume allowed to pipette
+- `experiment_label` to create a folder with organized data and plots
+- `send_results_to_here` path to where the files should be export (optional argument)
+
+This is an example of absorvance measurements of the standard protein solution to determine the calibration curve:
+
+| concentration_protein_standard |  abs  |
+| :----------------------------: | :---: |
+|               0                |  0.0  |
+|              250               | 0.250 |
+|              500               | 0.500 |
+|              750               | 0.750 |
+|              1000              |   1   |
+
+
+```r
+function_scenario02(experiment_label,input_calibration_table,input_sample_table, send_results_to_here)
+```
+
+Stepwise the function would do this:
+1. create the new directory in specified destination (or not)
+2. copy the `input_calibration_table.csv` and `input_sample_table.csv`
+3. from the calibration curve
+   1. calculate and extract the parameters of the linear regression parameter ($y=m+b$)
+4. copy `rmd` of `scenario02` from package and run it 
+   1. this runs another function that reads the absorvance values `df$abs` and performs the protein quantification and appends it to the `input_table2` to create the `output_table`
+   2. then this is used to calculate the `sample_volume` and `buffer_volume` wich will be appended to the table from the previous step
+      1. this could be a function, because it is a transversal step for many methods
+5. make the plots
+   1.  calibration curve
+   2.  bar plot with quantified protein
+   3.  make extra plot showing the unknown sample points in the calibration curve
+6. export rmd to pdf/or html
+7. export R objects
+

@@ -15,7 +15,7 @@ Now we can run a function to calculate the parameters of the curve, the correlat
 ```r
 function(my_calibration)
 print(plot_calibration)
-# maybe out put quality control check for R2<0.9 
+# maybe out put quality control check for R2< 0.9 
 ```
 
 The second step is to quantify the protein for our unknown samples. To do that we need the parameters (slope `m` and intercept `b`) of the calibration curve and the table of the unknown samples. 

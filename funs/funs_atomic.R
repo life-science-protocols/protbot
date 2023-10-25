@@ -60,3 +60,34 @@ dilution <- function(c1,c2,v2){
     
   return(v1)
 }
+
+## linear equation find x or y ####
+
+linear_equation_solver <- function(m, b, y=NULL, x=NULL){
+  
+  # check if m is 0
+  if (m == 0){
+    warning("the argument `m` for the slope cannot be 0")
+  }
+  # check that only one values is given for `m` and `b`
+  if (!all(length(m) == length(b) | length(m) >= 1)){
+    warning("the number of elements for slope `m` and intercept `b` should be the same")
+  }
+  # determine x 
+  if(!missing(y) && is.null(x)){
+    
+    x <- (y - b) / m
+    # print message to warn about zeros in the numerator `(y-b)`
+    if(any(is.infinite(x) | is.nan(x) | x == 0)){
+      print("The code ran but one or more elements of `x` are either 0,inf, or nan due to zeros from `(y-b)/m`")
+    }
+    return(x)
+  }
+  # determine y
+  if(!missing(x) && is.null(y)){
+    y <- m*x+b
+    return(y)
+  }
+}
+
+## ####

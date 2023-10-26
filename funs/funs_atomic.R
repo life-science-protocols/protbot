@@ -62,11 +62,39 @@ dilution <- function(c1,c2,v2){
 }
 
 ## linear equation find x or y ####
+#' function name
+#' @description
+#' 
+#' This function accepts three arguments, which are the parameters `m` and `b` of 
+#' a linear equation $y=mx+b$ and depending on what is provided as third argument, that is `y` or `x` 
+#' it calculates either `x` or `y`, respectively.
+#' 
+#' @details
+#' If a vector  `y` is given the function will determine the values of `x`, and vice-versa.
+#' This functions accepts one value for `m` and `b` and one or more for either `x` or `y`. 
+#' If the vector of `m` and `b` as more than one element then `x` and `y` needs to have equal length and the final value will be
+#' determined row wise.
+#' 
+#' @param m (num) a vector with value(s) of the slope 
+#' @param b (num) a vector with value(s) of the intercept 
+#' @return `x` or `y` (num) a vector with value(s) of `x` or `y`
+#'
+#' @seealso
+#' Learn more [here](https://en.wikipedia.org/wiki/Linear_equation)
+#' .
+#' @examples
+#' Suppose you know the slope and intercept of a calibration curve to determine protein concentration of three samples. 
+#' my_protein_concentration <- linear_equation_solver(m=0.5, b=0.001, c(0.5,0.3,0.8))
+#' print(my_protein_concentration)
+#' 
+#' Suppose you have values of slope and intercept from three different calibration curves to determine protein concentration of three samples. 
+#' my_protein_concentration <- linear_equation_solver(m=c(0.5,0.58, 0.48), b=c(0.001,0.001,0.000), c(0.5,0.3,0.8))
+#' print(my_protein_concentration)
 
 linear_equation_solver <- function(m, b, y=NULL, x=NULL){
   
   # check if m is 0
-  if (m == 0){
+  if (any(m == 0)){
     warning("the argument `m` for the slope cannot be 0")
   }
   # check that only one values is given for `m` and `b`

@@ -12,6 +12,8 @@ What the package does (one paragraph).
 Useful links:
 \itemize{
   \item \url{https://life-science-protocols.github.io/protbot/}
+  \item \url{https://github.com/life-science-protocols/protbot/}
+  \item Report bugs at \url{https://github.com/life-science-protocols/protbot/issues}
 }
 
 }

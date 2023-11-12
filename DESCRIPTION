@@ -17,4 +17,5 @@ Imports:
     rlang,
     tibble,
     vctrs
-URL: https://life-science-protocols.github.io/protbot/
+URL: https://life-science-protocols.github.io/protbot/, https://github.com/life-science-protocols/protbot/
+BugReports: https://github.com/life-science-protocols/protbot/issues

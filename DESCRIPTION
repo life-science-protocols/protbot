@@ -1,0 +1,20 @@
+Package: protbot
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.1
+Authors@R: c(
+    person("Leonardo", "Mendes-Silva", , "lmesilva@pattern.institute", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-5989-637X")),
+    person("Ramiro", "Magno", , "rmagno@pattern.institute", role = "aut",
+           comment = c(ORCID = "0000-0001-5226-3441")),
+    person("Pattern Institute", role = c("cph", "fnd"))
+  )
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: 
+    rlang,
+    tibble,
+    vctrs
+URL: https://life-science-protocols.github.io/protbot/

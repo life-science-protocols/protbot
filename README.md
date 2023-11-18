@@ -12,7 +12,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 The goal of `{protbot}` is to automate the process of protein
-quantification.
+quantification!
 
 ## Installation
 

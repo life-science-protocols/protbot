@@ -16,12 +16,12 @@ This is an hypothetical and simplified example.
 ## Background
 
 Understanding the intricate mechanisms underlying cellular responses to various stimuli is crucial for advancing our knowledge in molecular biology and developing effective therapeutic interventions. In this report, we investigate the impact of treatment with Molecule-A on the DNA damage response of Cell Line-C. The central question addressed is whether the administration of Molecule-A elicits an alteration in the cellular DNA damage response, as indicated by changes in DNA damage markers assessed via Western blot analysis.
-The experimental protocol involves seeding Cell Line-C in 25 $\units{cm^2}$ flasks and monitoring cell growth to ensure an adequate cell density of 3 million cells per condition at the time of harvest. Cells will be split into two groups: control and Molecule-A treatment.
+The experimental protocol involves seeding Cell Line-C in 25 $cm^2$ flasks and monitoring cell growth to ensure an adequate cell density of 3 million cells per condition at the time of harvest. Cells will be split into two groups: control and Molecule-A treatment.
 
 ## Experiment
 
 ### cel culture and treatment
-Cell Line-C was seeded into 25 $\units{cm^2}$ flasks at a density of 25,000 cells per flask and cultured with 10 mL of growth medium. The medium was replaced 24 hours (10 mL), and after 48 hours, cells reached about 80 % confluency, which equates to approximately  3 million of cells per flask.  (file:01_cell_seeding). 
+Cell Line-C was seeded into 25 $cm^2$ flasks at a density of 25,000 cells per flask and cultured with 10 mL of growth medium. The medium was replaced 24 hours (10 mL), and after 48 hours, cells reached about 80 % confluency, which equates to approximately  3 million of cells per flask.  (file:01_cell_seeding). 
 
 ```{r, echo = FALSE}
 vol_culture = 10 # mL
@@ -30,7 +30,7 @@ vol_experiment = 10 # mL
 
 At this stage (48 hours) Molecule-A, obtained from the manufacturer at a concentration of 100 µg/mL, was added to the cell culture by pipetting volume corresponding to 500 µg into fresh medium. The consumed medium was replaced with medium with either control or molecule-A accordingly. (file:02_treatment)
 
-```{r, echo = False}
+```{r, echo = FALSE}
 c_controlMolecule = 0 # µg/mL
 c_MoleculeA = 100 # µg/mL
 treatment_moleculeA = 500 # µg
@@ -57,7 +57,7 @@ volume_sample_Dilution = 100 # µL volume to prepare for quantification (30 µL 
 For the Bradford assay, 250 µL of Bradford reagent was added to each well of a 96-well plate, followed by the addition of 10 µL of sample or BSA standard to the appropriate wells (file:06_bradford_preparations). BSA standards were prepared by serial dilution in the lysis buffer diluted to the concentration as in the samples (file:07_calibrationCurve_solutions). Samples are read in triplicate (3 determinations per sample).
 
 ```{r, echo=FALSE}
-c_stock_protein = 1500 µg/µL # e.g. BSA stock concentration
+c_stock_protein = 1500 # µg/µL # e.g. BSA stock concentration
 bradfor_serialDilution= list(A=1500, B= 1000, C=800, D= 600, E=300, F=150, G=0) # in amount µg of protein
 volume_preparation_serialDilution = 500 # µL (only 30 are needed)
 volume_bradord_reaction = 250 # µL

@@ -1,0 +1,92 @@
+---
+title: "Use Case One"
+author: "Leonardo Mendes-Silva"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Protbot use case, an example
+
+This is an hypothetical and simplified example.
+
+## Background
+
+Understanding the intricate mechanisms underlying cellular responses to various stimuli is crucial for advancing our knowledge in molecular biology and developing effective therapeutic interventions. In this report, we investigate the impact of treatment with Molecule-A on the DNA damage response of Cell Line-C. The central question addressed is whether the administration of Molecule-A elicits an alteration in the cellular DNA damage response, as indicated by changes in DNA damage markers assessed via Western blot analysis.
+The experimental protocol involves seeding Cell Line-C in 25 $\units{cm^2}$ flasks and monitoring cell growth to ensure an adequate cell density of 3 million cells per condition at the time of harvest. Cells will be split into two groups: control and Molecule-A treatment.
+
+## Experiment
+
+### cel culture and treatment
+Cell Line-C was seeded into 25 $\units{cm^2}$ flasks at a density of 25,000 cells per flask and cultured with 10 mL of growth medium. The medium was replaced 24 hours (10 mL), and after 48 hours, cells reached about 80 % confluency, which equates to approximately  3 million of cells per flask.  (file:01_cell_seeding). 
+
+```{r, echo = FALSE}
+vol_culture = 10 # mL
+vol_experiment = 10 # mL
+```
+
+At this stage (48 hours) Molecule-A, obtained from the manufacturer at a concentration of 100 µg/mL, was added to the cell culture by pipetting volume corresponding to 500 µg into fresh medium. The consumed medium was replaced with medium with either control or molecule-A accordingly. (file:02_treatment)
+
+```{r, echo = False}
+c_controlMolecule = 0 # µg/mL
+c_MoleculeA = 100 # µg/mL
+treatment_moleculeA = 500 # µg
+```
+
+%%% print table with conditions, and volume of medium  per condition and total
+
+%%% print table with volume of medium, volume of molecule-A, volume of control
+
+### total protein purification
+
+Lysis buffer, comprising 800 µl of master buffer, 100 µl of inhibitor-A, and 100 µl of inhibitor-B (file:03_lysis_buffer), was prepared and added to the harvested cells at a volume of 1 mL per sample (file:04_lysis_buffer_needed). The obtained lysates were then centrifuged at 10,000 g for 30 minutes at 4 ºC to obtain clarified solutions for protein quantification (supernatant). From prior knowledge, for protein quantification samples were diluted 10x (05_sampleDilutions).
+```{r, echo=FALSE}
+lysis_buffer = list(buffer = 800, inhibtorA = 100, inhibtorB = 100)
+volume_lysis = 1000 # µL
+sample_dilution = 10 # times of dilution
+volume_sample_Dilution = 100 # µL volume to prepare for quantification (30 µL will be used)
+```
+
+%%% print table with buffer needed to preprare (for the two samples that are coming from culture) 
+
+### protein quantification
+
+For the Bradford assay, 250 µL of Bradford reagent was added to each well of a 96-well plate, followed by the addition of 10 µL of sample or BSA standard to the appropriate wells (file:06_bradford_preparations). BSA standards were prepared by serial dilution in the lysis buffer diluted to the concentration as in the samples (file:07_calibrationCurve_solutions). Samples are read in triplicate (3 determinations per sample).
+
+```{r, echo=FALSE}
+c_stock_protein = 1500 µg/µL # e.g. BSA stock concentration
+bradfor_serialDilution= list(A=1500, B= 1000, C=800, D= 600, E=300, F=150, G=0) # in amount µg of protein
+volume_preparation_serialDilution = 500 # µL (only 30 are needed)
+volume_bradord_reaction = 250 # µL
+volume_sample_reaction = 10 # µL
+sample_reads = 3 # reads in triplicate
+```
+
+%%% print table with Bradford reagent, n-calibration solutions from serial dilution (volume stock and previous; and volume of buffer); for the calibration curve
+
+The absorbance of each well was measured at the appropriate wavelength, and a calibration curve was generated from known BSA standard concentrations to determine protein concentrations in the samples (file:08_abs_reads).
+
+%%% print table with sample, protein concentration
+
+### SDS-PAGE
+
+The next step is the preparation of the samples to be loaded in the SDS-PAGE gel. The total amount of 30 µg of protein is loaded into the gel. The Laemmli Sample Buffer (4x concentrated) is diluted for the final volume of 50 µL (max volume of the well, which depends on the gel/well) (file:10_gel_loading). 
+
+```{r, echo=FALSE}
+c_Laemmli = 4 # times concentrated,final is 1x
+sample_amount = 30 # µg
+volume_well = 50 # µL
+excess_factor = 1.1
+```
+
+%%% print table with sample, protein concentration, volume for 30 µg, Laemmli's and water/buffer
+
+
+### blot
+
+After running the SDS-PAGE and incubating with the antibodies of interest, densitometry analysis was performed to semi-quantify the protein of interest and the loading control. The loading control serves as an internal standard to normalize for any variations in the amount of protein loaded (expressed in µg). It's essential for the loading control values to be consistent across conditions, indicating uniform loading. The obtained densitometry values serve as the basis for statistical analysis to test our hypothesis (11_blotQuantitfication). Additionally, these values are utilized for generating graphical representations, typically in the form of bar plots. 
+
+%%% print plot with final results 
